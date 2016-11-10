@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+		<!-- Path to your custom app styles-->
+		<link rel="stylesheet"  href="css/jquery.mobile.structure.css" />
+		<!-- <link rel="stylesheet" href="css/jquery.mobile.theme.css" /> -->
+
+		<!--Import Google Icon Font-->
+		 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		 <!--Import materialize.css-->
+		 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+		 <!--Let browser know website is optimized for mobile-->
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+         <script>
+			var userAgent = navigator.userAgent + '';
+			if (userAgent.indexOf('iPhone') > -1) {
+				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				var mobile_system = 'iphone';
+			} else if (userAgent.indexOf('Android') > -1) {
+				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				var mobile_system = 'android';
+			} else {
+				var mobile_system = '';
+			}
+		</script>
+
+		<script src="scripts/jquery.js"></script>
+		<!-- your scripts here -->
+
+		<script src="scripts/jquery.mobile.js"></script>
+
+
+
+
+		<script type="text/javascript">
+		var map;
+		document.addEventListener("deviceready", function() {
+		  var div = document.getElementById("map_canvas");
+
+		  // Initialize the map view
+		  map = plugin.google.maps.Map.getMap(div);
+
+		  // Wait until the map is ready status.
+		  map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+		}, false);
+
+		function onMapReady() {
+		  var button = document.getElementById("button");
+		  button.addEventListener("click", onBtnClicked);
+		}
+
+		function onBtnClicked() {
+
+		  // Move to the position with animation
+		  map.animateCamera({
+		    target: {lat: 37.422359, lng: -122.084344},
+		    zoom: 17,
+		    tilt: 60,
+		    bearing: 140,
+		    duration: 5000
+		  }, function() {
+
+		    // Add a maker
+		    map.addMarker({
+		      position: {lat: 37.422359, lng: -122.084344},
+		      title: "Welecome to \n" +
+		             "Cordova GoogleMaps plugin for iOS and Android",
+		      snippet: "This plugin is awesome!",
+		      animation: plugin.google.maps.Animation.BOUNCE
+		    }, function(marker) {
+
+		      // Show the info window
+		      marker.showInfoWindow();
+
+		      // Catch the click event
+		      marker.on(plugin.google.maps.event.INFO_CLICK, function() {
+
+		        // To do something...
+		        alert("Hello world!");
+
+		      });
+		    });
+		  });
+		}
+		</script>
+
+
+		<title>Rally</title>
+	</head>
+	<body>
+
+
+
+
+
+
+
+
+
+
+	   <div data-role="page" id="landingPage" style="background-image: url(img/roadmap.png);">
+
+			<div data-role="header" style="text-shadow: none">
+
+
+
+	</div><!-- /header -->
+
+			<div data-role="content" style="text-shadow: none">
+				<br><br><br><br>
+
+
+				<div class="row">
+        <div class="col s12 m6 ">
+       <div class="card medium centre black z-depth-5" style="background: url(img/roadmapsmall.png);">
+            <div class="card-content white-text">
+
+            <center><h1 class="card-title" style="font-weight: bold; color: orange;">Rally!</h1></center>
+              <center><p>Welcome to Rally! Join milions of people carpool worldwide.</p></center>
+            </div>
+            <div class="card-action">
+              <center><a href="#loginpage" data-transition="slidedown" style="color: blue lighten-2;">  Sign in!</a></center><br>
+              <center><a href="#signuppage" style="color: blue lighten-2; font-size: small;">Dont have an account? Click here!</a></center>
+            </div>
+          </div>
+        </div>
+      </div>
+
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+
+
+
+
+
+		<div data-role="page" id="loginpage" style="background: url(img/roadmapsmall.png);">
+
+			<div data-role="header" style="text-shadow: none">
+			</div><!-- /header -->
+
+			<div data-role="content" style="text-shadow: none">
+
+
+				<div class="row">
+	 <div class="col s12 m6">
+		 <div class="card black">
+			 <div class="card-content white-text">
+								<form class="login" style="margin-top:30%;height:58%" action="" method="POST" onsubmit='validate()'>
+									 <center><div class="card-title">Login to <span style="color: orange; font-weight: bold;">Rally!</span><br></div><center>
+	               <input style="color: orange;" type="text" name="username" id="Username" placeholder="Enter Username"/>
+	               <input style="color: orange;" type="password" name="password" id="Password" placeholder="Enter Password"/>
+	               <input style="color: orange;" id="buttonAdd" type="button" onclick="LoginUser()"  name="Login" value="Log In">
+	               <!-- <br><a style="margin-left:20%;" id="pwordForgot" href="" onclick="email()"></a> -->
+	               </form>
+							 </div>
+				</div>
+			</div>
+		</div>
+ 			</div>
+
+			</div><!-- /content -->
+
+
+
+
+
+
+
+			<div data-role="page" id="signuppage" style="background: url(img/roadmapsmall.png);">
+
+				<div data-role="header" style="text-shadow: none">
+				</div><!-- /header -->
+
+				<div data-role="content" style="text-shadow: none">
+
+
+					<div class="row">
+		 <div class="col s12 m6">
+			 <div class="card black">
+				 <div class="card-content white-text">
+									<form class="login" style="margin-top:30%;height:58%" action="" method="POST" onsubmit='validate()'>
+										 <center><div class="card-title">Login to <span style="color: orange; font-weight: bold;">Rally!</span><br></div><center>
+									 <input style="color: orange;" type="text" name="firstname" id="firstname" placeholder="Set Firstname"/>
+									 <input style="color: orange;" type="text" name="lastname" id="lastname" placeholder="Set Lastname"/>
+									 <input style="color: orange;" type="text" name="username" id="username" placeholder="Set Username"/>
+									 <input style="color: orange;" type="password" name="password" id="password" placeholder="Set Password"/>
+									 <input style="color: orange;" type="text" name="email" id="email" placeholder="Set Email"/>
+									 <input style="color: orange;" type="text" name="paymentmode" id="paymentmode" placeholder="Specify Payment"/>
+									 <input style="color: orange;" type="text" name="telephone" id="telephone" placeholder="Set telephone(e.g 233201234567)"/>
+									 <input style="color: orange;" id="buttonAdd" type="button" onclick="addUser()"  name="SignUp" value="Sign Up">
+									 <!-- <br><a style="margin-left:20%;" id="pwordForgot" href="" onclick="email()"></a> -->
+									 </form>
+								 </div>
+					</div>
+				</div>
+			</div>
+				</div><!-- /content -->
+
+				</div><!-- /page -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript" src="cordova.js"></script>
+			<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+			<script type="text/javascript" src="scripts/index.js"></script>
+			<script type="text/javascript" src="Userajax.js"></script>
+			<!--Import jQuery before materialize.js-->
+		 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+		 <script type="text/javascript" src="js/materialize.min.js"></script>
+
+	</body>
+</html>

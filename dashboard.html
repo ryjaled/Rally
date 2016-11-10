@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+		<!-- Path to your custom app styles-->
+		<link rel="stylesheet"  href="css/jquery.mobile.structure.css" />
+		<!-- <link rel="stylesheet" href="css/jquery.mobile.theme.css" /> -->
+
+		<!--Import Google Icon Font-->
+		 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		 <!--Import materialize.css-->
+		 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+		 <!--Let browser know website is optimized for mobile-->
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+         <script>
+			var userAgent = navigator.userAgent + '';
+			if (userAgent.indexOf('iPhone') > -1) {
+				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				var mobile_system = 'iphone';
+			} else if (userAgent.indexOf('Android') > -1) {
+				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				var mobile_system = 'android';
+			} else {
+				var mobile_system = '';
+			}
+		</script>
+
+		<script src="scripts/jquery.js"></script>
+		<!-- your scripts here -->
+
+		<script src="scripts/jquery.mobile.js"></script>
+
+
+
+
+		<script type="text/javascript">
+		var map;
+		document.addEventListener("deviceready", function() {
+		  var div = document.getElementById("map_canvas");
+
+		  // Initialize the map view
+		  map = plugin.google.maps.Map.getMap(div);
+
+		  // Wait until the map is ready status.
+		  map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+		}, false);
+
+		function onMapReady() {
+		  var button = document.getElementById("button");
+		  button.addEventListener("click", onBtnClicked);
+		}
+
+		function onBtnClicked() {
+
+		  // Move to the position with animation
+		  map.animateCamera({
+		    target: {lat: 37.422359, lng: -122.084344},
+		    zoom: 17,
+		    tilt: 60,
+		    bearing: 140,
+		    duration: 5000
+		  }, function() {
+
+		    // Add a maker
+		    map.addMarker({
+		      position: {lat: 37.422359, lng: -122.084344},
+		      title: "Welecome to \n" +
+		             "Cordova GoogleMaps plugin for iOS and Android",
+		      snippet: "This plugin is awesome!",
+		      animation: plugin.google.maps.Animation.BOUNCE
+		    }, function(marker) {
+
+		      // Show the info window
+		      marker.showInfoWindow();
+
+		      // Catch the click event
+		      marker.on(plugin.google.maps.event.INFO_CLICK, function() {
+
+		        // To do something...
+		        alert("Hello world!");
+
+		      });
+		    });
+		  });
+		}
+		</script>
+
+
+		<title>Rally</title>
+	</head>
+	<body>
+
+
+	   <div data-role="page" id="landingPage" style="background-image: url(img/roadmap.png);">
+
+			<div data-role="header" style="text-shadow: none">
+
+
+   <nav>
+     <div class="nav-wrapper black">
+       <a href="#" data-transition="slide" class="brand-logo" style="color: orange;">Rally!</a>
+     </div>
+   </nav>
+
+
+
+
+
+
+
+
+
+	</div><!-- /header -->
+
+			<div data-role="content" style="text-shadow: none">
+
+        <div class="col s9 m4" style="color: black;">
+            <!-- <h2 class="header">Horizontal Card</h2> -->
+            <div class="card horizontal orange">
+              <div class="card-image">
+                <img src="img/start.png" height="100" style="padding-top:30px;padding-left:30px;">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <center><p>Start a pool: Find other Ashesi people heading to town!</p></center>
+                </div>
+                <div class="card-action">
+                  <center><a href="create_pool.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>START A POOL</u></a></center>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col s9 m4" style="color: black;">
+              <!-- <h2 class="header">Horizontal Card</h2> -->
+              <div class="card horizontal orange">
+                <div class="card-image">
+                  <img src="img/join.png" height="100" style="padding-top:30px;padding-left:30px;">
+                </div>
+
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <center><p>Join a pool: Join Ashesi people creating pools heading to town!</p></center>
+                  </div>
+                  <div class="card-action">
+                    <center><a href="join_pool.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>JOIN A POOL</u></a></center>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col s9 m4" style="color: black;">
+                <!-- <h2 class="header">Horizontal Card</h2> -->
+                <div class="card horizontal orange">
+                  <div class="card-image">
+                    <img src="img/report.png" height="100" style="padding-top:30px;padding-left:30px;">
+                  </div>
+
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <center><p>Report: Generate a report of your <b>Rally!</b> successes and failures</p></center>
+                    </div>
+                    <div class="card-action">
+                      <center><a href="report_pool.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>SEE REPORTS</u></a></center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+            <div class="col s9 m4" style="color: black;">
+                <!-- <h2 class="header">Horizontal Card</h2> -->
+                <div class="card horizontal orange">
+                  <div class="card-image">
+                    <img src="img/newsrss.png" height="100" style="padding-top:30px;padding-left:30px;">
+                  </div>
+
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <center><p>News Feed: Your bits of information could help someone!</p></center>
+                    </div>
+                    <div class="card-action">
+                      <center><a href="news.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>POST NEWS</u></a></center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+
+
+
+
+
+
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript" src="cordova.js"></script>
+			<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+			<script type="text/javascript" src="scripts/index.js"></script>
+			<script type="text/javascript" src="Userajax.js"></script>
+			<!--Import jQuery before materialize.js-->
+		 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+		 <script type="text/javascript" src="js/materialize.min.js"></script>
+
+	</body>
+</html>
