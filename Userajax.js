@@ -12,21 +12,22 @@ function email(){
 *Redirects to the home page after login
 **/
 function LoginComplete(xhr,status){
+  console.log(xhr.responseText);
 
-  var obj = $.parseJSON(xhr.responseText);
+  var obj = JSON.parse(xhr.responseText);
+
   if(obj.result==1){
+    sessionStorage.id=obj.userID;
+    alert(sessionStorage.id+"2");
+    // sessionStorage.id=obj.username;
+
     window.location="dashboard.html";
   }
   else{
-    if(obj.email==null){
+    alert("here3");
       alert(obj.message);
     }
-    else{
-      pwordForgot.innerHTML="Forgot your password?";
-      $("#pwordForgot").attr("href", "dashboard.html");
-      alert(obj.message);
-    }
-  }
+
 }
 
 //Passes the users information to be logged in
@@ -34,6 +35,7 @@ function LoginUser(){
   var username=$("#Username").val();
   var password=$("#Password").val();
   var theUrl="usersajax.php?cmd=6&username="+username+"&password="+password;
+//  prompt("url", theUrl);
   $.ajax(theUrl,{
     async:true,
     complete:LoginComplete
@@ -163,7 +165,6 @@ function deleteUser(object,id){
 **/
 function addUserComplete(xhr,status){
 console.log(xhr.responseText);
-console.log("dasiudasndsandadasndasjndasnd")
 var obj = $.parseJSON(xhr.responseText);
     if(obj.result==1){
     userID=obj.userID;
@@ -178,6 +179,7 @@ var obj = $.parseJSON(xhr.responseText);
     $("#email").val("");
     $("#paymentmode").val("");
     $("#telephone").val("");
+    window.location="index.html";
     }
     else{
     alert(obj.message);
@@ -201,6 +203,56 @@ function addUser(){
   var theUrl="usersajax.php?cmd=5&firstname="+firstname+
   "&lastname="+lastname+"&username="+username+"&password="
   +password+"&email="+email+"&paymentmode="+paymentmode+"&telephone="+telephone;
+
+  $.ajax(theUrl,
+    {async:true,
+      complete:addUserComplete	});
+}
+
+
+
+function addPoolComplete(xhr,status){
+console.log(xhr.responseText);
+var obj = $.parseJSON(xhr.responseText);
+    if(obj.result==1){
+    //userID=obj.userID;
+
+    alert("Pool successfully created!");
+    /*Fields emptied after adding User*/
+
+    // $("#firstname").val("");
+    // $("#lastname").val("");
+    // $("#username").val("");
+    // $("#password").val("");
+    // $("#email").val("");
+    // $("#paymentmode").val("");
+    // $("#telephone").val("");
+    $("#poolname").val("");
+    $("#poolcapacity").val("");
+    $("#pooldestination").val("");
+    $("#pooldeparture").val("");
+    //window.location="dashboard.html";
+    }
+    else{
+    alert(obj.message);
+    }
+
+}
+
+
+function addPool(){
+  var poolname = $("#poolname").val();
+  var poolcapacity = $("#poolcapacity").val();
+  var pooldestination=$("#pooldestination").val();
+  var pooldeparture=$("#pooldeparture").val();
+  var poolcreateid = sessionStorage.id;
+  // var email=$("#email").val();
+
+
+
+  var theUrl="usersajax.php?cmd=1&poolname="+poolname+
+  "&poolcapacity="+poolcapacity+"&poolcreateid="+poolcreateid+"&pooldestination="+pooldestination+"&pooldeparture="
+  +pooldeparture;
 
   $.ajax(theUrl,
     {async:true,

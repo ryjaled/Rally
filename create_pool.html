@@ -97,16 +97,38 @@
 	</head>
 	<body>
 
-
-	   <div data-role="page" id="createpool" style="background-image: url(img/roadmap.png);">
+		<div data-role="page" id="createpool" style="background-image: url(img/roadmap.png);">
 
 			<div data-role="header" style="text-shadow: none">
+			 <nav>
+				 <div class="nav-wrapper black">
+					 <a href="#landingPage" style="padding-left: 15px;color: orange;" data-transition="turn">Back</a>
+				 </div>
+			 </nav>
 
-	     </div><!-- /header -->
+		 </div><!-- /header -->
 
-			<div data-role="content" style="text-shadow: none">
-        <p>asnjdkas</p>
-			</div><!-- /content -->
+		 <div data-role="content" style="text-shadow: none">
+
+			 <div class="row">
+	<div class="col s12 m6">
+		<div class="card black">
+			<div class="card-content white-text">
+							 <form class="login" style="margin-top:30%;height:58%" action="" method="POST" onsubmit='validate()'>
+									<center><div class="card-title">Create a <span style="color: orange; font-weight: bold;">Rally!</span> Car Pool<br></div><center>
+								<input style="color: orange;" type="text" name="poolname" id="poolname" placeholder="Please enter the pool name"/>
+								<input style="color: orange;" type="text" name="poolcapacity" id="poolcapacity" placeholder="Please enter the pool capacity"/>
+								<input style="color: orange;" type="text" name="pooldestination" id="pooldestination" placeholder="Please enter the destination of this pool"/>
+								<input style="color: orange;" type="text" name="pooldeparture" id="pooldeparture" placeholder="Please enter the departure time"/>
+								<input style="color: orange;" id="buttonAdd" type="button" onclick="addPool()"  name="addPool" value="Add Pool">
+								<!-- <br><a style="margin-left:20%;" id="pwordForgot" href="" onclick="email()"></a> -->
+								</form>
+							</div>
+			 </div>
+		 </div>
+	 </div>
+
+		 </div><!-- /content -->
 
 		</div><!-- /page -->
 

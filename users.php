@@ -29,6 +29,17 @@ include_once("adb.php");
 			return $this->query($strQuery);
 		}
 
+		function addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldeparture,$pooldestination){
+			$strQuery="insert into create_pool set
+							POOL_NAME='$poolname',
+							MAX_CAPACITY='$poolcapacity',
+							USER_ID='$poolcreateid',
+							POOL_DESTINATION='$pooldeparture',
+							POOL_DEPARTURE='$pooldestination' ";
+
+			return $this->query($strQuery);
+		}
+
 
 		/**
 		* edits existing user in the database
@@ -97,13 +108,13 @@ include_once("adb.php");
 		*/
 		function login($userName,$password)
 		{
-			$strQuery = "Select * from userinfo where username = '$userName' and password = MD5('$password')";
+			$strQuery = "Select * from user where USERNAME = '$userName' and PASSWORD = '$password'";
+
 			$data = $this->query($strQuery);
 			$result=$this->fetch();
 			if($result=="")
 			{
 				$result=false;
-
 			}
 
 			return $result;

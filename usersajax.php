@@ -9,7 +9,7 @@
 	$cmd=$_REQUEST['cmd'];
 	switch($cmd){
 		case 1:
-			editUserName();
+			addNewPool();
 			break;
     case 2:
       editFirstName();
@@ -32,25 +32,29 @@
 	}
 
 //Edits user's first name
-  function editUserName(){
-    include_once("../Model/users.php");
-
-		if(!isset($_REQUEST['uc'])){
-			echo"No user information";
+function addNewPool(){
+		include("users.php");
+		$user=new users();
+		if($_REQUEST['poolname']==""){
+			echo'{"result":0,"message":"User info not given"}';
+			exit();
 		}
-		$usercode=$_REQUEST['uc'];
-		$username=$_REQUEST['username'];
 
-		$user = new users();
+		$poolname=$_REQUEST['poolname'];
+		$poolcapacity=$_REQUEST['poolcapacity'];
+		$pooldeparture=$_REQUEST['pooldeparture'];
+		$poolcreateid=$_REQUEST['poolcreateid'];
+		$pooldestination=$_REQUEST['pooldestination'];
 
-		$verify = $user->editName(1,$username,$usercode);
-		if($verify==true){
-			echo"User Changed";
+
+		$verify=$user->addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldeparture,$pooldestination);
+		if($verify==false){
+			echo'{"result":0,"message":"Pool not added"}';
 		}
 		else{
-			echo"User not changed";
+			echo'{"result":1,"message":"Pool added"}';
 		}
-  }
+	}
 
 //Edits user's firstname
 	function editFirstName(){
@@ -176,13 +180,19 @@ function addNewUser(){
 				// }
 				// else{
 					echo '{"result":0,"message":"Wrong User information"}';
+
 				// }
 
 			}
 			else{
 				session_start();
-				$_SESSION['user']=$verify;
-				echo'{"result":1,"message":"Welcome to the AIS"}';
+				$_SESSION=$verify;
+				$id=$user->getID($username);
+				$id=$user->fetch();
+				$array=array('result'=>1,'message'=>'User logged in',
+			'username'=>$username,'password'=>$password,'userID'=>$id["USER_ID"]);
+				echo json_encode($array);
+			//	echo'{"result":1,"message":"Welcome to the Rally"}';
 			}
 
 		}
