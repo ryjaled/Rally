@@ -68,7 +68,7 @@ var obj = $.parseJSON(xhr.responseText);
     $("#email").val("");
     $("#paymentmode").val("");
     $("#telephone").val("");
-    window.location="http://52.89.116.249/~ryan.moujaled/index.html";
+    window.location="index.html";
     }
     else{
     alert(obj.message);
