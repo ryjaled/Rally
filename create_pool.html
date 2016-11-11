@@ -120,13 +120,45 @@
 								<input style="color: orange;" type="text" name="poolcapacity" id="poolcapacity" placeholder="Please enter the pool capacity"/>
 								<input style="color: orange;" type="text" name="pooldestination" id="pooldestination" placeholder="Please enter the destination of this pool"/>
 								<input style="color: orange;" type="text" name="pooldeparture" id="pooldeparture" placeholder="Please enter the departure time"/>
-								<input style="color: orange;" id="buttonAdd" type="button" onclick="addPool()"  name="addPool" value="Add Pool">
+								<input style="color: orange;" id="buttonAdd" type="button" onclick="addPool()"  name="AddPool" value="Add Pool">
 								<!-- <br><a style="margin-left:20%;" id="pwordForgot" href="" onclick="email()"></a> -->
 								</form>
+								  
 							</div>
 			 </div>
 		 </div>
 	 </div>
+
+		 </div><!-- /content -->
+
+		</div><!-- /page -->
+
+
+		<div data-role="page" id="mappage" style="background-image: url(img/roadmap.png);">
+
+			<div data-role="header" style="text-shadow: none">
+			 <nav>
+				 <div class="nav-wrapper black">
+					 <a href="#createpool" style="padding-left: 15px;color: orange;" data-transition="turn">Back</a>
+				 </div>
+			 </nav>
+
+		 </div><!-- /header -->
+
+		 <div data-role="content" style="text-shadow: none">
+
+			 <div id="map" style="width:100%;height:500px"></div>
+
+					 <script>
+					 function myMap() {
+					   var mapCanvas = document.getElementById("map");
+					   var mapOptions = {
+					     center: new google.maps.LatLng(51.5, -0.2),
+					     zoom: 10
+					   }
+					   var map = new google.maps.Map(mapCanvas, mapOptions);
+					 }
+					 </script>
 
 		 </div><!-- /content -->
 
@@ -142,7 +174,8 @@
 			<script type="text/javascript" src="cordova.js"></script>
 			<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 			<script type="text/javascript" src="scripts/index.js"></script>
-			<script type="text/javascript" src="Userajax.js"></script>
+			<script type="text/javascript" src="framework.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 			<!--Import jQuery before materialize.js-->
 		 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
 		 <script type="text/javascript" src="js/materialize.min.js"></script>

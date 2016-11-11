@@ -134,7 +134,8 @@
                     <center><p>Join a pool: Join Ashesi people creating pools heading to town!</p></center>
                   </div>
                   <div class="card-action">
-                    <center><a href="join_pool.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>JOIN A POOL</u></a></center>
+                    <center><a href="#joinpool" data-transition= "slide" style="font-weight: bold; color:black;" onclick="return getPool();"><u>JOIN A POOL</u></a></center>
+										<!-- <button type="button" onclick = "getPool()">JOIN A POOL!</button> -->
                   </div>
                 </div>
               </div>
@@ -155,7 +156,7 @@
                       <center><p>Report: Generate a report of your <b>Rally!</b> successes and failures</p></center>
                     </div>
                     <div class="card-action">
-                      <center><a href="report_pool.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>SEE REPORTS</u></a></center>
+                      <center><a href="#reportage" data-transition= "slide" onclick="return getReport();" style="font-weight: bold; color:black;"><u>SEE REPORTS</u></a></center>
                     </div>
                   </div>
                 </div>
@@ -179,17 +180,129 @@
                       <center><p>News Feed: Your bits of information could help someone!</p></center>
                     </div>
                     <div class="card-action">
-                      <center><a href="news.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>POST NEWS</u></a></center>
+                      <center><a href="#newspage" data-transition= "slide" onclick="return getNews();" style="font-weight: bold; color:black;"><u>SEE NEWS</u></a></center>
                     </div>
                   </div>
                 </div>
               </div>
 
 
+
+							<div class="col s9 m4" style="color: black;">
+	                <!-- <h2 class="header">Horizontal Card</h2> -->
+	                <div class="card horizontal orange">
+	                  <div class="card-image">
+	                    <img src="" height="100" style="padding-top:30px;padding-left:30px;">
+	                  </div>
+
+	                  <div class="card-stacked">
+	                    <div class="card-content">
+	                      <center><p>Map View: See your location on the map!</p></center>
+	                    </div>
+	                    <div class="card-action">
+	                      <center><a href="map.html" data-transition= "slide" style="font-weight: bold; color:black;"><u>VIEW MAP</u></a></center>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+
+
+
+
+
 			</div><!-- /content -->
 
 		</div><!-- /page -->
 
+
+		<div data-role="page" id="joinpool" style="background-image: url(img/roadmap.png);">
+
+			<div data-role="header" style="text-shadow: none">
+ 				<nav>
+ 		      <div class="nav-wrapper black">
+ 		        <a href="#landingPage" style="padding-left: 15px;color: orange;" data-transition="pop">Back</a>
+ 		      </div>
+ 		    </nav>
+
+ 			</div><!-- /header -->
+
+		 <div data-role="content" style="text-shadow: none">
+
+
+			 <div class="displaypools">
+
+<!--
+					 <a href="">
+						 <div class="row">
+								 <div class="col s12 m6">
+									 <div class="card black">
+										 <div class="card-content orange-text">
+											 <span>Pool Destination</span><span style="padding-left:60px;">Pool Departure</span>
+											 <p>Pool Id</p>
+											 <p>Pool Creator</p>
+											 <p>Pool Name</p>
+											 <p>Pool Capacity</p>
+										 </div>
+									 </div>
+								 </div>
+							 </div>
+					 </a> -->
+
+
+			 </div>
+
+		 </div><!-- /content -->
+
+	 </div><!-- /page -->
+
+
+
+	 <div data-role="page" id="reportage" style="background-image: url(img/roadmap.png);">
+
+		 <div data-role="header" style="text-shadow: none">
+			 <nav>
+				 <div class="nav-wrapper black">
+					 <a href="#landingPage" style="padding-left: 15px;color: orange;" data-transition="pop">Back</a>
+				 </div>
+			 </nav>
+
+		 </div><!-- /header -->
+
+	  <div data-role="content" style="text-shadow: none">
+
+				<div class="displayreport">
+
+ 				</div>
+
+	 	 </div><!-- /content -->
+
+	 </div><!-- /page -->
+
+
+
+
+	 <div data-role="page" id="newspage" style="background-image: url(img/roadmap.png);">
+
+		 <div data-role="header" style="text-shadow: none">
+			 <nav>
+				 <div class="nav-wrapper black">
+					 <a href="#landingPage" style="padding-left: 15px;color: orange;" data-transition="pop">Back</a>
+				 </div>
+			 </nav>
+
+		 </div><!-- /header -->
+
+	  <div data-role="content" style="text-shadow: none; color: orange;">
+			<button style ="padding-left: 70px; background-color:black;" id="capturePhoto" style="color:white">Camera</button>
+      <div><center><img class="lazy" style="display:none;width:100%;height:100%;" id="smallImage" src="" /></center></div>
+
+				<div class="newsstories">
+
+ 				</div>
+
+	 	 </div><!-- /content -->
+
+	 </div><!-- /page -->
 
 
 
@@ -200,7 +313,7 @@
 			<script type="text/javascript" src="cordova.js"></script>
 			<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 			<script type="text/javascript" src="scripts/index.js"></script>
-			<script type="text/javascript" src="Userajax.js"></script>
+			<script type="text/javascript" src="framework.js"></script>
 			<!--Import jQuery before materialize.js-->
 		 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
 		 <script type="text/javascript" src="js/materialize.min.js"></script>

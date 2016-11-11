@@ -29,46 +29,21 @@ include_once("adb.php");
 			return $this->query($strQuery);
 		}
 
-		function addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldeparture,$pooldestination){
+		function addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldestination,$pooldeparture){
 			$strQuery="insert into create_pool set
 							POOL_NAME='$poolname',
 							MAX_CAPACITY='$poolcapacity',
 							USER_ID='$poolcreateid',
-							POOL_DESTINATION='$pooldeparture',
-							POOL_DEPARTURE='$pooldestination' ";
-
+							POOL_DESTINATION='$pooldestination',
+							POOL_DEPARTURE='$pooldeparture' ";
 			return $this->query($strQuery);
 		}
 
-
-		/**
-		* edits existing user in the database
-		* @param [all attributes of a user]
-		* @return boolean repersenting success or failure
-		*/
-
-		function editUser($userID,$username,$firstname,$lastname,$password,$email){
-			$strQuery= "update userinfo set
-								username='$username',
-								firstname='$firstname',
-								lastname='$lastname',
-								password=MD5('$password'),
-								email='$email'
-							where userID='$userID' ";
-			return $this->query($strQuery);
-		}
-
-
-		/**
-		* Edits a  user's name in the database
-		* @param user's Id, updated name, unique name identifier
-		* @return boolean representing success or failure
-		*/
-
-		function editName($name,$userID){
-			$strQuery="";
-
-				$strQuery= "update userinfo set lastname='$name' where userID='$userID' ";
+		function joinapool($ownerid,$passengerid,$poolid){
+			$strQuery="insert into join_pool set
+							OWNER_ID='$ownerid',
+							PASSENGER_ID='$passengerid',
+							JOINEDPOOL_ID='$poolid' ";
 
 			return $this->query($strQuery);
 		}
@@ -78,8 +53,9 @@ include_once("adb.php");
 		* @param primary key of user's table
 		* @return boolean representing success or failure
 		*/
-		function deleteUser($usercode){
-			$strQuery ="Delete from userinfo where userID = '$usercode'";
+		function getFull(){
+			// $strQuery ="SELECT COUNT(PASSENGER_ID),join_pool.JOINEDPOOL_ID,create_pool.POOL_ID FROM join_pool,create_pool WHERE join_pool.JOINEDPOOL_ID=create_pool.POOL_ID";
+			// $strQuery = "Select COUNT(PASSENGER_ID),join_pool.JOINEDPOOL_ID,create_pool.MAX_CAPACITY from join_pool,create_pool where join_pool.JOINEDPOOL_ID=4";
 			return $this->query($strQuery);
 
 		}
@@ -89,15 +65,18 @@ include_once("adb.php");
 		* @param primary key of user's table
 		* @return row(s) of user's attributes
 		*/
-		function getUser($usercode=false)
+		function getUser($userID)
 		{
-			if($usercode==false){
-				$strQuery ="Select * from userinfo";
-			}
-			else{
-				$strQuery ="Select * from userinfo where userID = $usercode ";
-			}
 
+				$strQuery ="Select USERNAME from user where USER_ID ="+$userID;
+			return $this->query($strQuery);
+
+		}
+
+		function getPools()
+		{
+				$strQuery ="Select create_pool.POOL_ID, create_pool.POOL_NAME, create_pool.MAX_CAPACITY, create_pool.USER_ID, create_pool.POOL_DESTINATION, create_pool.POOL_DEPARTURE, user.FIRSTNAME, user.LASTNAME
+				 from create_pool,user WHERE create_pool.USER_ID = user.USER_ID";
 			return $this->query($strQuery);
 		}
 
@@ -120,41 +99,24 @@ include_once("adb.php");
 			return $result;
 		}
 
-		/**
-		* toggles the availability of the user whose id is passed as parameter
-		* @param: user's id, or other unique identifier
-		* @return: the new availability of the user
-		*/
-		// function toggleAvailability($userID,$login=false){
-		// 	if($login==false){
-		// 		$available = 1;
-		// 	}
-		// 	else{
-		// 		$available = 0;
-		// 	}
-		// 	$strQuery="update userinfo set availability ='$available' where userID='$userID' ";
-		// 	return $this->query($strQuery);
-		// }
 
-		/**
-		* returns the user Type of a specific user
-		* @return: an array containing a person's user type
-		*/
-		// function getType($password){
-		// 	$strQuery="Select userType,userID from userinfo where password = MD5('$password')";
-		// 	return $this->query($strQuery);
-		// }
-
-		/**
-		* get user email, with primary key
-		* @param user's name
-		* @return user's email
-		*/
-		function getEmail($userName)
+		function pullReport($userid)
 		{
-				$strQuery ="Select email from userinfo where username = '$userName' ";
+			$strQuery = "Select * from create_pool where USER_ID = '$userid'";
+
 			return $this->query($strQuery);
+
 		}
+
+		function pullNews()
+		{
+			$strQuery = "Select * from news_stories";
+
+			return $this->query($strQuery);
+
+		}
+
+
 
 		/**
 		* get user id

@@ -12,19 +12,25 @@
 			addNewPool();
 			break;
     case 2:
-      editFirstName();
+      getJoinPools();
       break;
 		case 3:
-			editLastName();
+			joinAPool();
 			break;
 		case 4:
-		  deleteUser();
+		  checkFull();
 		  break;
 		case 5:
 			addNewUser();
 			break;
 		case 6:
 			login();
+			break;
+		case 7:
+			generateReport();
+			break;
+		case 8:
+			getNews();
 			break;
 		default:
 			echo "wrong cmd";	//change to json message
@@ -47,7 +53,7 @@ function addNewPool(){
 		$pooldestination=$_REQUEST['pooldestination'];
 
 
-		$verify=$user->addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldeparture,$pooldestination);
+		$verify=$user->addNewPool($poolname,$poolcapacity,$poolcreateid,$pooldestination,$pooldeparture);
 		if($verify==false){
 			echo'{"result":0,"message":"Pool not added"}';
 		}
@@ -57,63 +63,63 @@ function addNewPool(){
 	}
 
 //Edits user's firstname
-	function editFirstName(){
-    include_once("../Model/users.php");
-
-		if(!isset($_REQUEST['uc'])){
-			echo"No user information";
-		}
-		$usercode=$_REQUEST['uc'];
-		$firstname=$_REQUEST['firstname'];
+	function getJoinPools(){
+    include_once("users.php");
 
 		$user = new users();
 
-		$verify = $user->editName(2,$firstname,$usercode);
-		if($verify==true){
-			echo"User Changed";
+		$verify = $user->getPools();
+
+
+		$array = array();
+		while($one = $user->fetch())
+		{
+			$array[] = $one;
 		}
-		else{
-			echo"User not changed";
-		}
+
+		echo json_encode($array);
   }
 
 //Edits user's lastname
-	function editLastName(){
-		include_once("../Model/users.php");
+	function joinAPool(){
+		include_once("users.php");
 
-		if(!isset($_REQUEST['uc'])){
-			echo"No user information";
-		}
-		$usercode=$_REQUEST['uc'];
-		$lastname=$_REQUEST['lastname'];
+			$user = new users();
 
-		$user = new users();
+			$ownerid=$_REQUEST['ownerid'];
+			$passengerid=$_REQUEST['passengerid'];
+			$poolid=$_REQUEST['poolid'];
 
-		$verify = $user->editName(3,$lastname,$usercode);
+			echo $ownerid;
+			echo $passengerid;
+			echo $poolid;
+
+		$verify = $user->joinapool($ownerid,$passengerid,$poolid);
 		if($verify==true){
-			echo"User Changed";
+
+			echo'{"result":1,"message":"Pool join successful"}';
+			$sender = "Rally";
+
+			$message = "Joining the pool was successful! You will be notified of payments and departure times";
+			$smsmessage = str_replace(' ','%20',$message);
+			$tel = "233201320188";
+			$ch = curl_init("http://52.89.116.249:13013/cgi-bin/sendsms?username=mobileapp&password=foobar&to=$tel&from=$sender&smsc=smsc&text=$smsmessage");
+			//session_write_close();
+			curl_exec($ch);
 		}
 		else{
-			echo"User not changed";
+			echo'{"result":0,"message":"Pool join unsuccessful"}';
 		}
 	}
 
 //Deletes User
-	  function deleteUser(){
-	    if(!isset($_REQUEST['uc'])){
-	      echo "usercode is not given";
-	      exit();
-	    }
+	  function checkFull(){
 
-	    $Id=$_REQUEST['uc'];
-	    include("../Model/users.php");
+	    include("users.php");
 	    $user=new users();
-	    //delete the user
-	    if($user->deleteUser($Id)){
-	      echo "User deleted";
-	    }else{
-	      echo "User was not deleted.";
-	    }
+
+
+			// echo json_encode($myarray);
 	  }
 
 //Adds new User
@@ -196,4 +202,39 @@ function addNewUser(){
 			}
 
 		}
+
+		function generateReport()
+		{
+			include("users.php");
+			$user=new users();
+			$user_id=$_REQUEST['id'];
+
+			$verify = $user->pullReport($user_id);
+
+			$array = array();
+			while($one = $user->fetch())
+			{
+				$array[] = $one;
+			}
+
+			echo json_encode($array);
+		}
+
+		function getNews()
+		{
+			include("users.php");
+			$user=new users();
+
+
+			$verify = $user->pullNews();
+
+			$array = array();
+			while($one = $user->fetch())
+			{
+				$array[] = $one;
+			}
+
+			echo json_encode($array);
+		}
+
 ?>
