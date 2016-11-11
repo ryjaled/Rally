@@ -22,7 +22,7 @@ function LoginComplete(xhr,status){
     sessionStorage.id=obj.userID;
     // sessionStorage.id=obj.username;
 
-    window.location="dashboard.html";
+    window.location="http://52.89.116.249/~ryan.moujaled/dashboard.html";
   }
   else{
 
@@ -35,7 +35,7 @@ function LoginComplete(xhr,status){
 function LoginUser(){
   var username=$("#Username").val();
   var password=$("#Password").val();
-  var theUrl="frameajax.php?cmd=6&username="+username+"&password="+password;
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=6&username="+username+"&password="+password;
 //  prompt("url", theUrl);
   $.ajax(theUrl,{
     async:true,
@@ -67,7 +67,7 @@ var obj = $.parseJSON(xhr.responseText);
     $("#email").val("");
     $("#paymentmode").val("");
     $("#telephone").val("");
-    window.location="index.html";
+    window.location="http://52.89.116.249/~ryan.moujaled/index.html";
     }
     else{
     alert(obj.message);
@@ -88,7 +88,7 @@ function addUser(){
   var telephone = $("#telephone").val();
 
 
-  var theUrl="frameajax.php?cmd=5&firstname="+firstname+
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=5&firstname="+firstname+
   "&lastname="+lastname+"&username="+username+"&password="
   +password+"&email="+email+"&paymentmode="+paymentmode+"&telephone="+telephone;
 
@@ -140,7 +140,7 @@ function addPool(){
 
 
 
-  var theUrl="frameajax.php?cmd=1&poolname="+poolname+
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=1&poolname="+poolname+
   "&poolcapacity="+poolcapacity+"&poolcreateid="+poolcreateid+"&pooldestination="+pooldestination+"&pooldeparture="+pooldeparture;
 
   $.ajax(theUrl,
@@ -205,7 +205,7 @@ if(obj!=null){
 
 function getPool(){
 
-  var theUrl="frameajax.php?cmd=2";
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=2";
 
   $.ajax(theUrl,{
     async:true,
@@ -234,7 +234,7 @@ function joinPool(i){
 
   var joinerid = sessionStorage.id;
 
-  var theUrl="frameajax.php?cmd=3&ownerid="+array[i].userid+
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=3&ownerid="+array[i].userid+
   "&passengerid="+joinerid+"&poolid="+array[i].poolid;
 
 //  prompt("url", theUrl);
@@ -251,7 +251,7 @@ function isFullComplete(xhr,response){
 
 function isFull(){
 
-  var theUrl="frameajax.php?cmd=4";
+  var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=4";
 
   $.ajax(theUrl,{
     async:true,
@@ -298,7 +298,7 @@ function getReportComplete(xhr,status){
 
 function getReport(){
     var i = sessionStorage.id;
-    var theUrl="frameajax.php?cmd=7&id="+i;
+    var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=7&id="+i;
 
     $.ajax(theUrl,
       {async:true,
@@ -341,7 +341,7 @@ function getNewsComplete(xhr,status){
 
 function getNews(){
 
-    var theUrl="frameajax.php?cmd=8";
+    var theUrl="http://52.89.116.249/~ryan.moujaled/frameajax.php?cmd=8";
 alert("here");
     $.ajax(theUrl,
       {async:true,
