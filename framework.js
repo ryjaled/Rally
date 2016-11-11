@@ -31,6 +31,7 @@ function LoginComplete(xhr,status){
 
 }
 
+
 //Passes the users information to be logged in
 function LoginUser(){
   var username=$("#Username").val();
