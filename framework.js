@@ -22,7 +22,7 @@ function LoginComplete(xhr,status){
     sessionStorage.id=obj.userID;
     // sessionStorage.id=obj.username;
 
-    window.location="http://52.89.116.249/~ryan.moujaled/dashboard.html";
+    window.location="dashboard.html";
   }
   else{
 
